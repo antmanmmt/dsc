@@ -12,7 +12,6 @@ install-module xwebadministration -force
 install-module xnetworking -force
 install-module cntfsaccesscontrol -force
 install-module xPSDesiredStateConfiguration -force
-install-module PsDesiredStateConfiguration -force
 install-module NetworkingDsc -force
 
 ## Parameters
