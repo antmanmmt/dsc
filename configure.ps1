@@ -1,3 +1,4 @@
+New-EventLog -LogName Application -Source "Terraform Setup Script"
 function install-modules
 {
  Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
@@ -814,9 +815,9 @@ function sslHardening
     Write-Host -ForegroundColor Red 'A computer restart is required to apply settings. Restart computer now?'
     Restart-Computer -Force 
  }
-Write-EventLog -LogName Application -Source "MyApp" -EventID 3001 -Message "Hi Ant Can You See Me?."
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Hi Ant Can You See Me?."
 install-modules;
-Write-EventLog -LogName Application -Source "MyApp" -EventID 3001 -Message "Installed Modules."
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Installed Modules."
 ConfigureDisk -NodeName 'localhost' -Drive 'F' -DiskNumber 2
 ConfigureIIS -NodeName 'localhost' -InetpubRoot 'F:\inetpub'
 CreateKenticoAdminWebsite -NodeName 'localhost' -WwwRoot 'F:\inetpub\wwwroot' -Website $admWebsite 
@@ -827,19 +828,19 @@ WebConfig
 
 
 Start-DSCConfiguration -Path .\ConfigureDisk -Wait -Verbose -Force
-Write-EventLog -LogName Application -Source "MyApp" -EventID 3001 -Message "Configured Disk."
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Configured Disk."
 Start-DSCConfiguration -Path .\ConfigureIIS -Wait -Verbose -Force
-Write-EventLog -LogName Application -Source "MyApp" -EventID 3001 -Message "Configured IIS."
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Configured IIS."
 Start-DSCConfiguration -Path .\CreateKenticoAdminWebsite -Wait -Verbose -Force
-Write-EventLog -LogName Application -Source "MyApp" -EventID 3001 -Message "Created Admin Site."
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Created Admin Site."
 Start-DSCConfiguration -Path .\CreateKenticoMvcWebsite -Wait -Verbose -Force
-Write-EventLog -LogName Application -Source "MyApp" -EventID 3001 -Message "Created MVC Site."
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Created MVC Site."
 Start-DSCConfiguration -Path .\InboundRules -Wait -Verbose -Force
-Write-EventLog -LogName Application -Source "MyApp" -EventID 3001 -Message "Added Firewall Rules."
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Added Firewall Rules."
 Start-DSCConfiguration -Path .\WebConfig -Wait -Verbose -Force
-Write-EventLog -LogName Application -Source "MyApp" -EventID 3001 -Message "Changed Web.Config Max Size."
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Changed Web.Config Max Size."
 chocoInstall;
-Write-EventLog -LogName Application -Source "MyApp" -EventID 3001 -Message "Installed Chocolatey."
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Installed Chocolatey."
 choco;
-Write-EventLog -LogName Application -Source "MyApp" -EventID 3001 -Message "Installed Choco Features."
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Installed Choco Features."
 sslHardening;
