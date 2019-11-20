@@ -1,4 +1,4 @@
-﻿Set-ExecutionPolicy -ExecutionPolicy Bypass
+﻿Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
  ## install nuget provider
 install-packageprovider -name nuget -minimumversion 2.8.5.201 -force
