@@ -816,6 +816,7 @@ function sslHardening
  }
  
 install-modules;
+Write-EventLog -ComputerName "Server01" -LogName Application -Source "MyApp" -EventID 3001 -Message "Installed Modules."
 ConfigureDisk -NodeName 'localhost' -Drive 'F' -DiskNumber 2
 ConfigureIIS -NodeName 'localhost' -InetpubRoot 'F:\inetpub'
 CreateKenticoAdminWebsite -NodeName 'localhost' -WwwRoot 'F:\inetpub\wwwroot' -Website $admWebsite 
@@ -826,11 +827,19 @@ WebConfig
 
 
 Start-DSCConfiguration -Path .\ConfigureDisk -Wait -Verbose -Force
+Write-EventLog -ComputerName "Server01" -LogName Application -Source "MyApp" -EventID 3001 -Message "Configured Disk."
 Start-DSCConfiguration -Path .\ConfigureIIS -Wait -Verbose -Force
+Write-EventLog -ComputerName "Server01" -LogName Application -Source "MyApp" -EventID 3001 -Message "Configured IIS."
 Start-DSCConfiguration -Path .\CreateKenticoAdminWebsite -Wait -Verbose -Force
+Write-EventLog -ComputerName "Server01" -LogName Application -Source "MyApp" -EventID 3001 -Message "Created Admin Site."
 Start-DSCConfiguration -Path .\CreateKenticoMvcWebsite -Wait -Verbose -Force
+Write-EventLog -ComputerName "Server01" -LogName Application -Source "MyApp" -EventID 3001 -Message "Created MVC Site."
 Start-DSCConfiguration -Path .\InboundRules -Wait -Verbose -Force
+Write-EventLog -ComputerName "Server01" -LogName Application -Source "MyApp" -EventID 3001 -Message "Added Firewall Rules."
 Start-DSCConfiguration -Path .\WebConfig -Wait -Verbose -Force
+Write-EventLog -ComputerName "Server01" -LogName Application -Source "MyApp" -EventID 3001 -Message "Changed Web.Config Max Size."
 chocoInstall;
+Write-EventLog -ComputerName "Server01" -LogName Application -Source "MyApp" -EventID 3001 -Message "Installed Chocolatey."
 choco;
+Write-EventLog -ComputerName "Server01" -LogName Application -Source "MyApp" -EventID 3001 -Message "Installed Choco Features."
 sslHardening;
