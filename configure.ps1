@@ -524,7 +524,8 @@ function chocoInstall
 
     # Run the installer
     iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
-
+    
+    refreshenv
 }
 
 function choco
@@ -826,5 +827,6 @@ Start-DSCConfiguration -Path .\CreateKenticoMvcWebsite -Wait -Verbose -Force
 Start-DSCConfiguration -Path .\InboundRules -Wait -Verbose -Force
 Start-DSCConfiguration -Path .\WebConfig -Wait -Verbose -Force
 chocoInstall;
+refreshenv
 choco;
 sslHardening;
