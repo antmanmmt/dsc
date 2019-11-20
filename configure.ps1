@@ -1,4 +1,5 @@
 New-EventLog -LogName Application -Source "Terraform Setup Script"
+Install-Module -Name xWebAdministration -Force
 function install-modules
 {
  Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
