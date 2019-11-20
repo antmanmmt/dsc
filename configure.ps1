@@ -1,24 +1,6 @@
 New-EventLog -LogName Application -Source "Terraform Setup Script"
 Install-Module -Name xWebAdministration -Force
-function install-modules
-{
- Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
-  ## install nuget provider
- install-packageprovider -name nuget -minimumversion 2.8.5.201 -force
-
- ## trust the psgallery
- set-psrepository -name "psgallery" -installationpolicy trusted
-
- ## installed required packages (note that these must be available int he psgallery)
- install-module xstorage -force
- Install-Module -Name xWebAdministration -Force
- install-module xwebadministration -force
- install-module xnetworking -force
- install-module cntfsaccesscontrol -force
- install-module xPSDesiredStateConfiguration -force
- install-module NetworkingDsc -force
-}
 ## Parameters
 $admWebsite = "admin.bootshearingcare.com"
 $mvcWebsite = "mvc.bootshearingcare.com"
@@ -818,8 +800,6 @@ function sslHardening
     Restart-Computer -Force 
  }
 Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Hi Ant Can You See Me?."
-install-modules;
-Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "Installed Modules."
 ConfigureDisk -NodeName 'localhost' -Drive 'F' -DiskNumber 2
 ConfigureIIS -NodeName 'localhost' -InetpubRoot 'F:\inetpub'
 CreateKenticoAdminWebsite -NodeName 'localhost' -WwwRoot 'F:\inetpub\wwwroot' -Website $admWebsite 
