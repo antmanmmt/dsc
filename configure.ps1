@@ -1,19 +1,21 @@
-﻿Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
+function install-modules
+{
+ Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
 
- ## install nuget provider
-install-packageprovider -name nuget -minimumversion 2.8.5.201 -force
+  ## install nuget provider
+ install-packageprovider -name nuget -minimumversion 2.8.5.201 -force
 
-## trust the psgallery
-set-psrepository -name "psgallery" -installationpolicy trusted
+ ## trust the psgallery
+ set-psrepository -name "psgallery" -installationpolicy trusted
 
-## installed required packages (note that these must be available int he psgallery)
-install-module xstorage -force
-install-module xwebadministration -force
-install-module xnetworking -force
-install-module cntfsaccesscontrol -force
-install-module xPSDesiredStateConfiguration -force
-install-module NetworkingDsc -force
-
+ ## installed required packages (note that these must be available int he psgallery)
+ install-module xstorage -force
+ install-module xwebadministration -force
+ install-module xnetworking -force
+ install-module cntfsaccesscontrol -force
+ install-module xPSDesiredStateConfiguration -force
+ install-module NetworkingDsc -force
+}
 ## Parameters
 $admWebsite = "admin.bootshearingcare.com"
 $mvcWebsite = "mvc.bootshearingcare.com"
@@ -812,13 +814,16 @@ function sslHardening
     Write-Host -ForegroundColor Red 'A computer restart is required to apply settings. Restart computer now?'
     Restart-Computer -Force 
  }
-
+ 
+install-modules;
 ConfigureDisk -NodeName 'localhost' -Drive 'F' -DiskNumber 2
 ConfigureIIS -NodeName 'localhost' -InetpubRoot 'F:\inetpub'
 CreateKenticoAdminWebsite -NodeName 'localhost' -WwwRoot 'F:\inetpub\wwwroot' -Website $admWebsite 
 CreateKenticoMvcWebsite -NodeName 'localhost' -WwwRoot 'F:\inetpub\wwwroot' -Website $mvcWebsite 
 InboundRules
 WebConfig
+
+
 
 Start-DSCConfiguration -Path .\ConfigureDisk -Wait -Verbose -Force
 Start-DSCConfiguration -Path .\ConfigureIIS -Wait -Verbose -Force
