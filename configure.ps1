@@ -1,4 +1,6 @@
-﻿## install nuget provider
+﻿Set-ExecutionPolicy -ExecutionPolicy Bypass
+
+ ## install nuget provider
 install-packageprovider -name nuget -minimumversion 2.8.5.201 -force
 
 ## trust the psgallery
