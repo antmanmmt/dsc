@@ -832,6 +832,5 @@ Start-DSCConfiguration -Path .\CreateKenticoMvcWebsite -Wait -Verbose -Force
 Start-DSCConfiguration -Path .\InboundRules -Wait -Verbose -Force
 Start-DSCConfiguration -Path .\WebConfig -Wait -Verbose -Force
 chocoInstall;
-refreshenv
 choco;
 sslHardening;
