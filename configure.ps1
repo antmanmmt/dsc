@@ -11,6 +11,7 @@ function install-modules
 
  ## installed required packages (note that these must be available int he psgallery)
  install-module xstorage -force
+ Install-Module -Name xWebAdministration -Force
  install-module xwebadministration -force
  install-module xnetworking -force
  install-module cntfsaccesscontrol -force
