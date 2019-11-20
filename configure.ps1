@@ -1,5 +1,19 @@
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
+
 New-EventLog -LogName Application -Source "Terraform Setup Script"
-Install-Module -Name xWebAdministration -Force
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "1"
+
+## install nuget provider
+install-packageprovider -name nuget -minimumversion 2.8.5.201 -force
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "2"
+
+## trust the psgallery
+set-psrepository -name "psgallery" -installationpolicy trusted
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "3"
+
+## installed required packages (note that these must be available int he psgallery)
+install-module xstorage, xWebAdministration, xnetworking, cntfsaccesscontrol, xPSDesiredStateConfiguration, NetworkingDsc -force
+Write-EventLog -LogName Application -Source "Terraform Setup Script" -EventID 3001 -Message "4"
 
 ## Parameters
 $admWebsite = "admin.bootshearingcare.com"
